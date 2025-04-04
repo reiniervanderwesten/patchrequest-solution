@@ -37,6 +37,29 @@ const App = () => {
 	
 	}
 
+  const changeUser = async () => {
+    const response = await fetch("http://localhost:3000/users/3", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json;charset=utf-8" },
+      body: JSON.stringify({ name: naampje }),
+    });
+  
+    const vijand = await response.json();
+    console.log("vijandnaam:", vijand.name);
+    console.log("users:", users);
+  
+    const newBooks = users.map((user) => {
+      console.log("userID:", user.id);
+      console.log("Username:", user.name);
+      console.log("user met nieuwe naam:", vijand.name);
+  
+      if (user.id === 3) {
+        return { ...user, name: vijand.name };
+      }
+      return user;
+    });
+
+
 
   return (
     <div className="App">
