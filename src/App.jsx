@@ -38,6 +38,9 @@ const App = () => {
         ))}
       </ul>
       {selectedUser && <UserDetail user={selectedUser} />}
+      <button onClick={()=>destroyUser()}>test destroy user</button>
+      <button onClick={()=>changeUser()}>change user</button>
+
     </div>
   );
 };
