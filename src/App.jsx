@@ -26,6 +26,18 @@ const App = () => {
     setUsers(users.concat(user));
   };
 
+  const destroyUser=async ()=>{
+		const response= await fetch('http://localhost:3000/users/4',{
+			method: "DELETE",
+			headers: {"Content-Type": "application/json;charset=utf-8"},
+		});
+		const vrienden= await response.json();
+		setUsers(vrienden.filter(vriend => vriend.id !== 4))    
+
+	
+	}
+
+
   return (
     <div className="App">
       <h1>React Hooks exercise starter</h1>
