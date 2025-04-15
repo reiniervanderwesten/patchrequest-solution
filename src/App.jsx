@@ -32,7 +32,8 @@ const App = () => {
 			headers: {"Content-Type": "application/json;charset=utf-8"},
 		});
 		const vrienden= await response.json();
-		setUsers(vrienden.filter(vriend => vriend.id !== 4))    
+		setUsers(vrienden.filter(vriend => vriend.id !== 4))  
+    //alternatief: setUsers(users.filter(user=>user.id!==4))  
 
 	
 	}
