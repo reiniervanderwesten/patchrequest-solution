@@ -6,11 +6,14 @@ const App = () => {
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
 
+  
+
   useEffect(() => {
     const fetchUsers = async () => {
       const response = await fetch("http://localhost:3000/users");
       const friends = await response.json();
       setUsers(friends);
+      console.log("friends:", friends)
     };
     fetchUsers();
   }, []);
@@ -26,19 +29,20 @@ const App = () => {
     setUsers(users.concat(user));
   };
 
-  const destroyUser=async ()=>{
+  	const destroyUser=async ()=>{
 		const response= await fetch('http://localhost:3000/users/4',{
 			method: "DELETE",
 			headers: {"Content-Type": "application/json;charset=utf-8"},
 		});
 		const vrienden= await response.json();
-		setUsers(vrienden.filter(vriend => vriend.id !== 4))  
-    //alternatief: setUsers(users.filter(user=>user.id!==4))  
+		setUsers(vrienden.filter(vriend => vriend.id !== 4))    
 
 	
 	}
 
-  const changeUser = async () => {
+  const naampje="Luke";
+
+	const changeUser = async () => {
     const response = await fetch("http://localhost:3000/users/3", {
       method: "PATCH",
       headers: { "Content-Type": "application/json;charset=utf-8" },
@@ -47,18 +51,30 @@ const App = () => {
   
     const vijand = await response.json();
     console.log("vijandnaam:", vijand.name);
-    console.log("users:", users);
+    console.log("Bestaat gebruiker 3?", users.find(u=>u.id===3));
+    
   
     const newBooks = users.map((user) => {
       console.log("userID:", user.id);
       console.log("Username:", user.name);
       console.log("user met nieuwe naam:", vijand.name);
   
-      if (user.id === 3) {
-        return { ...user, name: vijand.name };
+      if (user.id === "3") {
+        const updatedUser= { ...user, name: vijand.name };
+        return updatedUser;
       }
       return user;
     });
+  
+    console.log("Newbooks:", newBooks);
+    setUsers(newBooks);
+  };
+  
+
+
+
+  
+
 
 
 
@@ -75,11 +91,43 @@ const App = () => {
         ))}
       </ul>
       {selectedUser && <UserDetail user={selectedUser} />}
-      <button onClick={()=>destroyUser()}>test destroy user</button>
-      <button onClick={()=>changeUser()}>change user</button>
-
+	  <button onClick={()=>destroyUser()}>test destroy user</button>
+	  <button onClick={()=>changeUser()}>change user</button>
     </div>
-  );
-}};
-
+  )};
 export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
