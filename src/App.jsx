@@ -10,10 +10,16 @@ const App = () => {
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const response = await fetch("http://localhost:3000/users");
-      const friends = await response.json();
-      setUsers(friends);
-      console.log("friends:", friends)
+      try{
+        const response = await fetch("http://localhost:3000/users");
+        const friends = await response.json();
+        setUsers(friends);
+        console.log("friends:", friends)
+
+      } catch(error){
+        console.log(error);
+      }
+      
     };
     fetchUsers();
   }, []);
